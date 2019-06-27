@@ -5,6 +5,7 @@ import * as request from 'request-promise-native';
 import * as Ajv from 'ajv';
 import * as fileType from 'file-type';
 import * as Sharp from 'sharp';
+import * as Smartcrop from 'smartcrop-sharp';
 
 import { Schema } from './options/options.schema';
 import { Mimes } from './options/options.mimes';
@@ -33,7 +34,7 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
   request({url, encoding: null})
 
     // Start the manipulation
-    .then((image: Buffer) => {
+    .then(async (image: Buffer) => {
       // Variables
       let query = event.queryStringParameters;
 
@@ -52,6 +53,27 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
 
       // Start an instance of sharp for our image
       let sharp = Sharp(image);
+
+      // Smartcrop
+      if ( query.smartcrop ) {
+        // Find the best crop for this image
+        let result = await Smartcrop.crop(image, {
+          width: ( query.width || undefined ),
+          height: ( query.height || undefined )
+        });
+
+        // Perform crop
+        try {
+          sharp.extract({
+            left: result.topCrop.x,
+            top: result.topCrop.y,
+            width: result.topCrop.width,
+            height: result.topCrop.width
+          });
+        } catch(e) {
+          throw new Error('Unable to find smartcrop for this image');
+        }
+      }
 
       // Trim
       if ( query.trim ) {
@@ -120,21 +142,21 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
       }
 
       // Grayscale/greyscale
-      if ( query.grayscale === 1 || query.greyscale === 1 ) {
+      if ( query.grayscale || query.greyscale ) {
         sharp.greyscale(true);
       }
 
       // Negative
-      if ( query.negative === 1 ) {
+      if ( query.negative ) {
         sharp.negate(true);
       }
 
       // Progressive JPEG
-      if ( query.progressive === 1 && metadata.mime === 'image/jpeg' ) {
+      if ( query.progressive && metadata.mime === 'image/jpeg' ) {
         sharp.jpeg({progressive: true});
 
       // Progressive PNG
-      } else if ( query.progressive === 1 && metadata.mime === 'image/png' ) {
+      } else if ( query.progressive && metadata.mime === 'image/png' ) {
         sharp.png({progressive: true});
       }
 

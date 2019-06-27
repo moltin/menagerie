@@ -25,6 +25,10 @@ export const Schema = {
       minimum: 1,
       maximum: 2500
     },
+    smartcrop: {
+      type: 'integer',
+      enum: [0, 1]
+    },
     trim: {
       type: 'integer',
       minimum: 1,
