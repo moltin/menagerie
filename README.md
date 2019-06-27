@@ -12,7 +12,7 @@ npm install --arch=x64 --platform=linux --target=10.15.0 sharp --save
 
 > **Note:** Initially used yarn but couldn't get the dependencies to build correctly for lambda.
 
-To configure the project, open up `serverless.yml` and change `enviornment.S3_URL` to the correct bucket, left the current community bucket as an example.
+To configure the project, open up `serverless.yml` and change `enviornment.S3_URL` to the correct bucket, as well as the `alias` domain to your own (or remove if not needed). Defaults have been left as the current community bucket, and `https://commercecdn.com` as an example.
 
 ## Deployment
 Requires the serverless CLI, to install run: `npm install -g serverless`
