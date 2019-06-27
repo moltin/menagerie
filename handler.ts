@@ -83,9 +83,9 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
         sharp.resize(query.height, query.height, {fit: query.fit});
       }
 
-      // Flatten alpha layers
-      if ( query.flatten === 1 ) {
-        sharp.flatten({ background: ( query.background || undefined )});
+      // Flatten alpha layers or add background
+      if ( query.flatten === 1 || query.background !== undefined ) {
+        sharp.flatten({background: ( query.background || undefined )});
       }
 
       // Flip/flop

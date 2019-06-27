@@ -61,7 +61,7 @@ Will produce a new 250x250 cropped image, using the data `100` pixels from the t
   - `x` to flip horizontally
   - or `y` to flip vertically
 
-**background** - Sets the background color for the image when it's being resized, or rotated, options are:
+**background** - Sets the background color of the image, mainly used when resizing or rotating, options are:
   - Colors, for example `red`, `green`, `purple`, `orange`, etc.
   - Hex codes, with `#` encoded as `%23`, for example `%23ff0000` would be red
   - `transparent` when dealing with image formats that support it
