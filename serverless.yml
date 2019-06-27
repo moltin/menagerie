@@ -5,7 +5,7 @@ provider:
   runtime: nodejs10.x
   memorySize: 2048
   timeout: 10
-  stage: dev
+  stage: production
   region: eu-west-1
   environment:
     S3_URL: https://s3-eu-west-1.amazonaws.com/bkt-svc-files-cmty-api-moltin-com
@@ -13,6 +13,7 @@ provider:
 plugins:
   - serverless-plugin-typescript
   - serverless-apigw-binary
+  - serverless-content-encoding
 
 custom:
   apigwBinary:
@@ -23,6 +24,8 @@ custom:
       - 'image/gif'
       - 'image/svg'
       - 'image/webp'
+  contentEncoding:
+    minimumCompressionSize: 0
 
 functions:
   images:
@@ -37,3 +40,46 @@ functions:
              paths: 
                store: true
                image: true
+
+resources:
+  Resources:
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Comment: Menagerie CloudFront Distribution
+          Aliases:
+            - commercecdn.com
+          ViewerCertificate:
+            AcmCertificateArn: arn:aws:acm:us-east-1:351720204497:certificate/813b25f1-b502-4def-b32d-6052d5557955
+            SslSupportMethod: sni-only
+            MinimumProtocolVersion: TLSv1.1_2016
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - HEAD
+              - GET
+              - OPTIONS
+            CachedMethods:
+              - HEAD
+              - GET
+            TargetOriginId: MenagerieOrigin
+            ViewerProtocolPolicy: 'redirect-to-https'
+            DefaultTTL: 1314000
+            Compress: true
+            ForwardedValues:
+              QueryString: true
+          Enabled: true
+          PriceClass: PriceClass_All
+          HttpVersion: http2
+          Origins:
+            - Id: MenagerieOrigin
+              DomainName:
+                Fn::Join:
+                  - "."
+                  - - Ref: ApiGatewayRestApi
+                    - execute-api.eu-west-1.amazonaws.com
+              OriginPath: /production
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: https-only
