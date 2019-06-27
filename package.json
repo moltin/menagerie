@@ -34,6 +34,7 @@
     "@types/sharp": "^0.22.2",
     "aws-lambda": "^0.1.2",
     "serverless-apigw-binary": "^0.4.4",
+    "serverless-content-encoding": "^1.1.0",
     "serverless-plugin-typescript": "^1.1.7",
     "typescript": "^3.5.2"
   }
