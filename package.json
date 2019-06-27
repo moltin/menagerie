@@ -1,0 +1,40 @@
+{
+  "name": "menagerie",
+  "version": "1.0.0",
+  "description": "Image manipulation and optimisation serverless function",
+  "main": "handler.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moltin/menagerie.git"
+  },
+  "keywords": [
+    "serverless",
+    "lambda",
+    "image"
+  ],
+  "author": "Jamie Holdroyd <jamie@moltin.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moltin/menagerie/issues"
+  },
+  "homepage": "https://github.com/moltin/menagerie#readme",
+  "dependencies": {
+    "ajv": "^6.10.0",
+    "file-type": "^12.0.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "sharp": "^0.22.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.10",
+    "@types/request-promise-native": "^1.0.16",
+    "@types/sharp": "^0.22.2",
+    "aws-lambda": "^0.1.2",
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-plugin-typescript": "^1.1.7",
+    "typescript": "^3.5.2"
+  }
+}

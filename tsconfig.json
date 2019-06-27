@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "types" : [
+            "node",
+            "request-promise-native",
+            "sharp"
+        ]
+    }
+}

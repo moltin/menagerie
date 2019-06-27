@@ -1,0 +1,39 @@
+service: menagerie
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 2048
+  timeout: 10
+  stage: dev
+  region: eu-west-1
+  environment:
+    S3_URL: https://s3-eu-west-1.amazonaws.com/bkt-svc-files-cmty-api-moltin-com
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-apigw-binary
+
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
+      - 'image/jpeg'
+      - 'image/png'
+      - 'image/gif'
+      - 'image/svg'
+      - 'image/webp'
+
+functions:
+  images:
+    handler: handler.images
+    events:
+     - http:
+        path: /{store}/{image}
+        method: get
+        cors: true
+        request: 
+          parameters: 
+             paths: 
+               store: true
+               image: true
