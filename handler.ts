@@ -129,9 +129,13 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
         sharp.negate(true);
       }
 
-      // Progressive
+      // Progressive JPEG
       if ( query.progressive === 1 && metadata.mime === 'image/jpeg' ) {
         sharp.jpeg({progressive: true});
+
+      // Progressive PNG
+      } else if ( query.progressive === 1 && metadata.mime === 'image/png' ) {
+        sharp.png({progressive: true});
       }
 
       // Render the new image

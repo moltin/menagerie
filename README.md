@@ -78,7 +78,7 @@ Will produce a new 250x250 cropped image, using the data `100` pixels from the t
 
 **negative** - Invert the original images color pallete, _boolean 1 or 0_
 
-**progressive** - If the image is a JPEG will return it as a progressive one, _boolean 1 or 0_
+**progressive** - If the image is a `JPEG` or `PNG` will return it as a progressive one, _boolean 1 or 0_
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
