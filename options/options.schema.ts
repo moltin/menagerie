@@ -40,7 +40,7 @@ export const Schema = {
     },
     background: {
       type: 'string',
-      pattern: '^([a-z]+|rgb\\([0-9]{1,3}\\,\\s?[0-9]{1,3}\\,\\s?[0-9]{1,3}\\))$'
+      pattern: '^([#a-zA-Z0-9]+|rgb\\([0-9]{1,3}\\,\\s?[0-9]{1,3}\\,\\s?[0-9]{1,3}\\))$'
     },
     rotate: {
       type: 'integer',
@@ -67,7 +67,7 @@ export const Schema = {
     },
     tint: {
       type: 'string',
-      pattern: '^([a-z]+|rgb\\([0-9]{1,3}\\,\\s?[0-9]{1,3}\\,\\s?[0-9]{1,3}\\))$'
+      pattern: '^([#a-zA-Z0-9]+|rgb\\([0-9]{1,3}\\,\\s?[0-9]{1,3}\\,\\s?[0-9]{1,3}\\))$'
     },
     grayscale: {
       type: 'integer',

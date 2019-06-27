@@ -63,6 +63,7 @@ Will produce a new 250x250 cropped image, using the data `100` pixels from the t
 
 **background** - Sets the background color for the image when it's being resized, or rotated, options are:
   - Colors, for example `red`, `green`, `purple`, `orange`, etc.
+  - Hex codes, with `#` encoded as `%23`, for example `%23ff0000` would be red
   - `transparent` when dealing with image formats that support it
   - or `rgb(x, x, x)` so `rgb(255, 0, 0)` for red, gives much more fine grained control
  

@@ -63,3 +63,4 @@ typings/
 # Misc
 .DS_Store
 .serverless
+.build
