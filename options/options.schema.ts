@@ -29,6 +29,10 @@ export const Schema = {
       type: 'integer',
       enum: [0, 1]
     },
+    faces: {
+      type: 'integer',
+      enum: [0, 1]
+    },
     trim: {
       type: 'integer',
       minimum: 1,

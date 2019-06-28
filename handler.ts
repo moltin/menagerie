@@ -71,7 +71,7 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
             height: result.topCrop.width
           });
         } catch(e) {
-          throw new Error('Unable to find smartcrop for this image');
+          console.log('Unable to find smartcrop for this image');
         }
       }
 

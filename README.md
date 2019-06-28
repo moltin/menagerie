@@ -46,6 +46,8 @@ The following are the available URL params to use with your images.
   - `inside` maintains aspect ratio up to the smallest dimension
   - `outside` maintains aspcet ratio up to the largest dimension
 
+**smartcrop** - Content aware cropping to find the best area of the image to crop to, , _boolean 1 or 0_
+
 **top** & **left** - Used together with `width` and `height` to crop the image. example:
   - `height` = 250
   - `width` = 250
