@@ -13,7 +13,7 @@ export const Schema = {
     fit: {
       type: 'string',
       default: 'cover',
-      enum: ['cover', 'contain', 'fill', 'inside', 'outside']
+      enum: ['smart', 'cover', 'contain', 'fill', 'inside', 'outside']
     },
     left: {
       type: 'integer',
@@ -24,10 +24,6 @@ export const Schema = {
       type: 'integer',
       minimum: 1,
       maximum: 2500
-    },
-    smartcrop: {
-      type: 'integer',
-      enum: [0, 1]
     },
     faces: {
       type: 'integer',

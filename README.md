@@ -41,12 +41,11 @@ The following are the available URL params to use with your images.
 
 **fit** - How the image is scaled when resizing, options are:
   - `cover` fills the size, but maintains aspect ratio _(default)_
+  - `smart` content aware filter to find the best area of the image to show
   - `contain` image best fits new aspect ratio
   - `fill` stretches too fit the new image dimensins
   - `inside` maintains aspect ratio up to the smallest dimension
   - `outside` maintains aspcet ratio up to the largest dimension
-
-**smartcrop** - Content aware cropping to find the best area of the image to crop to, , _boolean 1 or 0_
 
 **top** & **left** - Used together with `width` and `height` to crop the image. example:
   - `height` = 250

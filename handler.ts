@@ -55,7 +55,7 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
       let sharp = Sharp(image);
 
       // Smartcrop
-      if ( query.smartcrop ) {
+      if ( query.fit === 'smart' ) {
         // Find the best crop for this image
         let result = await Smartcrop.crop(image, {
           width: ( query.width || undefined ),
@@ -69,6 +69,9 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
           width: result.topCrop.width,
           height: result.topCrop.width
         });
+
+        // Reset fit to default
+        query.fit = 'cover';
       }
 
       // Trim
