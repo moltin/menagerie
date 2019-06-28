@@ -63,16 +63,12 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
         });
 
         // Perform crop
-        try {
-          sharp.extract({
-            left: result.topCrop.x,
-            top: result.topCrop.y,
-            width: result.topCrop.width,
-            height: result.topCrop.width
-          });
-        } catch(e) {
-          console.log('Unable to find smartcrop for this image');
-        }
+        sharp.extract({
+          left: result.topCrop.x,
+          top: result.topCrop.y,
+          width: result.topCrop.width,
+          height: result.topCrop.width
+        });
       }
 
       // Trim
@@ -106,7 +102,7 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
       }
 
       // Flatten alpha layers or add background
-      if ( query.flatten === 1 || query.background !== undefined ) {
+      if ( query.flatten === 1 || ( query.background !== undefined && query.background !== 'transparent' ) ) {
         sharp.flatten({background: ( query.background || undefined )});
       }
 
@@ -192,9 +188,6 @@ export function images(event: APIGatewayEvent, context: Context, callback: Callb
           body: JSON.stringify({message: 'Image not found'})
         });
       }
-
-      // DEBUG
-      console.log(err);
 
       // General error
       return callback(null, {
